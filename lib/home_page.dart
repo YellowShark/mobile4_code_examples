@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
+              child: ListView.separated(
                 itemCount: _planets.length,
                 itemBuilder: (_, i) => PlanetCard(
                   planet: Planet(
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                     description: 'Lorem ipsum',
                   ),
                   onPressed: _onPlanetClick,
-                ),
+                ), separatorBuilder: (BuildContext context, int index) => Divider(),
               ),
             ),
           ],
