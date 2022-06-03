@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:widgets_app/details_page.dart';
-import 'package:widgets_app/planet.dart';
-import 'package:widgets_app/planet_card.dart';
+import 'package:widgets_app/splash_screen.dart';
+import 'package:widgets_app/lottie_sample.dart';
 
 import 'home_page.dart';
 
@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
-      initialRoute: '/home',
+      initialRoute: '/splash',
       routes: {
+        '/splash': (_) => const SplashScreen(),
         '/home': (_) => const HomePage(),
         '/details': (_) => const DetailsPage(),
       },

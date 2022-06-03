@@ -74,9 +74,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onPlanetClick(Planet planet) {
-    // setState(() {
-    //   _planets.remove(planet);
-    // });
     Navigator.pushNamed(
       context,
       '/details',
