@@ -6,6 +6,8 @@ import 'package:widgets_app/lottie_sample.dart';
 import 'home_page.dart';
 
 void main() {
+  var a = A(1);
+  a.b = 1;
   runApp(const MyApp());
 }
 
@@ -27,4 +29,11 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+class A {
+  @protected
+  int b;
+
+  A(this.b);
 }

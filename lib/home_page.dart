@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widgets_app/images.dart';
+import 'package:widgets_app/main.dart';
 import 'package:widgets_app/planet.dart';
 import 'package:widgets_app/planet_card.dart';
 
@@ -16,6 +17,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var a = A(1);
+    a.b = 2;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
