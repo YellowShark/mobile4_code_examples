@@ -42,7 +42,7 @@ class SignUpScreen extends StatelessWidget {
               final password = _passwordController.text;
               final passwordAgain = _passwordAgainController.text;
               if (password == passwordAgain) {
-                await _usersRepository.signUp(User(email, password));
+                await _usersRepository.signUp(User(email, password, ''));
                 Navigator.pop(context);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(

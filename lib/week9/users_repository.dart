@@ -5,6 +5,7 @@ import 'package:widgets_app/week9/user.dart';
 
 const _emailKey = '_emailKey';
 const _passwordKey = '_passwordKey';
+const _nameKey = '_passwordKey';
 
 const _users = '_users';
 
@@ -21,6 +22,7 @@ class UsersRepository {
 
     // await _sharedPreferences?.setString(_emailKey, user.email);
     // await _sharedPreferences?.setString(_passwordKey, user.password);
+    // await _sharedPreferences?.setString(_nameKey, user.name);
   }
 
   Future<bool> contains(User user) async {
@@ -33,6 +35,7 @@ class UsersRepository {
 
     // final savedEmail = _sharedPreferences?.getString(_emailKey);
     // final savedPassword = _sharedPreferences?.getString(_passwordKey);
+    // final savedName = _sharedPreferences?.getString(_nameKey);
     // return user.email == savedEmail && user.password == savedPassword;
   }
 

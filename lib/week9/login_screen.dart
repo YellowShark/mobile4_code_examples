@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
             onPressed: () async {
               final email = _emailController.text;
               final password = _passwordController.text;
-              final user = User(email, password);
+              final user = User(email, password, '');
               if (await _usersRepository.contains(user)) {
                 await _sessionManager.saveSession(user);
                 Navigator.pushReplacementNamed(context, '/home', arguments: email);

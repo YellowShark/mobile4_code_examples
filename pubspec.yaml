@@ -44,6 +44,9 @@ dependencies:
   # Shared Preferences
   shared_preferences: ^2.0.15
 
+  # Url launcher
+  url_launcher: ^6.1.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

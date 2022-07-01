@@ -1,16 +1,19 @@
 class User {
   final String email;
   final String password;
+  final String name;
 
-  User(this.email, this.password);
+  User(this.email, this.password, this.name);
 
   User.fromJson(Map<String, dynamic> json)
       : email = json['email'],
-        password = json['email'];
+        password = json['password'],
+        name = json['name'];
 
   Map<String, dynamic> toJson() => {
         'email': email,
         'password': password,
+        'name': password,
       };
 
   @override
