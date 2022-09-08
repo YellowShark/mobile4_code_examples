@@ -73,4 +73,29 @@ class FirebaseHelper {
   }
 
   static Stream<DatabaseEvent> readMessage() => FirebaseDatabase.instance.ref("message").onValue;
+
+  static void removeNote(String note) async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    final notes = await FirebaseDatabase.instance.ref("notes/$userId").get();
+    notes.children.forEach((element) {
+      if ((element.value as String?) == note) {
+        element.ref.remove();
+      }
+    });
+  }
+
+  static Future<bool> isProMode() async {
+    final id = FirebaseAuth.instance.currentUser?.uid;
+    if (id == null) return false;
+    final ref = FirebaseDatabase.instance.ref("subscriptions/$id/enable");
+    final snapshot = await ref.get();
+    return snapshot.value as bool? ?? false;
+  }
+
+  static Future enableProMode() async {
+    final id = FirebaseAuth.instance.currentUser?.uid;
+    if (id == null) return false;
+    final ref = FirebaseDatabase.instance.ref("subscriptions/$id/enable");
+    await ref.set(true);
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_example/firebase_helper.dart';
+import 'package:flutter_firebase_example/stripe_helper.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var username = '';
   var notes = <String>[];
   var message = '';
+  var proMode = false;
 
   @override
   void initState() {
@@ -43,15 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           const SizedBox(height: 24),
           Center(child: Text('Hello, $username!')),
-          const SizedBox(height: 24),
-          Expanded(
-            child: ListView.builder(
-              itemCount: notes.length,
-              itemBuilder: (_, i) => ListTile(
-                title: Text(notes[i]),
-              ),
-            ),
-          ),
+          if (proMode) ..._notes() else _payment(),
         ],
       ),
       floatingActionButton: Column(
@@ -111,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
       );
 
-  void _initData() {
+  Future _initData() async {
     FirebaseHelper.getNotes().listen((event) {
       final map = event.snapshot.value as Map<dynamic, dynamic>?;
       if (map != null) {
@@ -128,6 +122,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           message = value;
         });
       }
+    });
+    final isPro = await FirebaseHelper.isProMode();
+    setState(() {
+      proMode = isPro;
     });
   }
 
@@ -160,4 +158,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
           );
         },
       );
+
+  List<Widget> _notes() => [
+        const SizedBox(height: 24),
+        Expanded(
+          child: ListView.builder(
+            itemCount: notes.length,
+            itemBuilder: (_, i) => ListTile(
+              title: Text(notes[i]),
+              onTap: () => FirebaseHelper.removeNote(notes[i]),
+            ),
+          ),
+        )
+      ];
+
+  Widget _payment() {
+    return ElevatedButton(
+      onPressed: () {
+        StripeHelper.initPaymentSheet(
+            email: FirebaseAuth.instance.currentUser?.email ?? 'example@gmail.com',
+            amount: 500,
+            onSuccess: () async {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Payment completed!')),
+              );
+              await FirebaseHelper.enableProMode();
+              setState(() {
+                proMode = true;
+              });
+            },
+            onError: (error) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(error)),
+              );
+            });
+      },
+      child: const Text('Subscription'),
+    );
+  }
 }
