@@ -13,29 +13,29 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'note.dart';
+import 'data/entity/note_entity.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 7740894209377068726),
-      name: 'Note',
-      lastPropertyId: const IdUid(3, 5125572590003772847),
+      id: const IdUid(2, 3805144744840740762),
+      name: 'NoteEntity',
+      lastPropertyId: const IdUid(3, 3793835111304766747),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 6806296734864375663),
+            id: const IdUid(1, 6642241795669446831),
             name: 'id',
             type: 6,
-            flags: 129),
+            flags: 1),
         ModelProperty(
-            id: const IdUid(2, 7163141469430749741),
+            id: const IdUid(2, 4380424967704057698),
             name: 'name',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 5125572590003772847),
+            id: const IdUid(3, 3793835111304766747),
             name: 'description',
             type: 9,
             flags: 0)
@@ -64,28 +64,32 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 7740894209377068726),
+      lastEntityId: const IdUid(2, 3805144744840740762),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [],
+      retiredEntityUids: const [7740894209377068726],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [
+        6806296734864375663,
+        7163141469430749741,
+        5125572590003772847
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
 
   final bindings = <Type, EntityDefinition>{
-    Note: EntityDefinition<Note>(
+    NoteEntity: EntityDefinition<NoteEntity>(
         model: _entities[0],
-        toOneRelations: (Note object) => [],
-        toManyRelations: (Note object) => {},
-        getId: (Note object) => object.id,
-        setId: (Note object, int id) {
+        toOneRelations: (NoteEntity object) => [],
+        toManyRelations: (NoteEntity object) => {},
+        getId: (NoteEntity object) => object.id,
+        setId: (NoteEntity object, int id) {
           object.id = id;
         },
-        objectToFB: (Note object, fb.Builder fbb) {
+        objectToFB: (NoteEntity object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
           final descriptionOffset = fbb.writeString(object.description);
           fbb.startTable(4);
@@ -99,7 +103,7 @@ ModelDefinition getObjectBoxModel() {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
-          final object = Note(
+          final object = NoteEntity(
               id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
               name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
@@ -113,15 +117,17 @@ ModelDefinition getObjectBoxModel() {
   return ModelDefinition(model, bindings);
 }
 
-/// [Note] entity fields to define ObjectBox queries.
-class Note_ {
-  /// see [Note.id]
-  static final id = QueryIntegerProperty<Note>(_entities[0].properties[0]);
+/// [NoteEntity] entity fields to define ObjectBox queries.
+class NoteEntity_ {
+  /// see [NoteEntity.id]
+  static final id =
+      QueryIntegerProperty<NoteEntity>(_entities[0].properties[0]);
 
-  /// see [Note.name]
-  static final name = QueryStringProperty<Note>(_entities[0].properties[1]);
+  /// see [NoteEntity.name]
+  static final name =
+      QueryStringProperty<NoteEntity>(_entities[0].properties[1]);
 
-  /// see [Note.description]
+  /// see [NoteEntity.description]
   static final description =
-      QueryStringProperty<Note>(_entities[0].properties[2]);
+      QueryStringProperty<NoteEntity>(_entities[0].properties[2]);
 }

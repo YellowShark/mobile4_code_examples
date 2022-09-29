@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_notifications/note.dart';
-import 'package:flutter_notifications/notes_repository.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_notifications/data/entity/note_entity.dart';
+import 'package:flutter_notifications/data/repository/notes/notes_repository.dart';
+import 'package:flutter_notifications/domain/model/note.dart';
+import 'package:flutter_notifications/ui/notes/notes_store.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({Key? key}) : super(key: key);
@@ -12,26 +15,12 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> {
-  late final _notesRepo = NotesRepository();
-  late var _notes = <Note>[];
-  StreamSubscription? _subscription;
+  final _viewModel = NotesStore();
 
   @override
   void initState() {
     super.initState();
-    _notesRepo.initDB().whenComplete(() {
-      _subscription = _notesRepo.streamNotes.listen((list) {
-        setState(() {
-          _notes = list;
-        });
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _subscription?.cancel();
-    super.dispose();
+   _viewModel.getData();
   }
 
   @override
@@ -40,17 +29,19 @@ class _NotesPageState extends State<NotesPage> {
       appBar: AppBar(
         title: const Text('Notes'),
       ),
-      body: ListView.builder(
-        itemCount: _notes.length,
-        itemBuilder: (_, i) => ListTile(
-          title: Text(
-            _notes[i].name,
+      body: Observer(builder: (_) {
+        return ListView.builder(
+          itemCount: _viewModel.value.length,
+          itemBuilder: (_, i) => ListTile(
+            title: Text(
+              _viewModel.value[i].name,
+            ),
+            subtitle: Text(
+              _viewModel.value[i].description,
+            ),
           ),
-          subtitle: Text(
-            _notes[i].description,
-          ),
-        ),
-      ),
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showDialog(),
         child: const Icon(Icons.add),
@@ -82,8 +73,8 @@ class _NotesPageState extends State<NotesPage> {
             actions: [
               TextButton(
                 onPressed: () async {
-                  await _notesRepo.addNote(
-                    Note(
+                  await _viewModel.addNote(
+                    Note.create(
                       name: nameController.text,
                       description: descController.text,
                     ),
