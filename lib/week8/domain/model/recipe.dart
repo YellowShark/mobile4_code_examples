@@ -1,14 +1,11 @@
 class Recipe {
   final String title;
   final String image;
+  final String time;
 
   Recipe({
     required this.title,
     required this.image,
+    required this.time,
   });
-
-  factory Recipe.fromJson(Map<String, dynamic> json) => Recipe(
-        title: json['title'],
-        image: json['image'],
-      );
 }

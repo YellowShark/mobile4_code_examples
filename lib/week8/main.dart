@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:widgets_app/week7.dart';
-import 'package:widgets_app/week8/ui/home_screen.dart';
+import 'package:widgets_app/week8/ui/home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());

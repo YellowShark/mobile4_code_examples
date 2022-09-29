@@ -3,6 +3,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:http/http.dart' as http;
 //
+// const apiKey = 'd8984725e8224950a239ba8a2e1ecf47';
+//
 // class RecipesScreen extends StatefulWidget {
 //   const RecipesScreen({Key? key}) : super(key: key);
 //
@@ -33,8 +35,7 @@
 //   }
 //
 //   Future<void> _fetchData() async {
-//     const key = 'd8984725e8224950a239ba8a2e1ecf47';
-//     const url = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=$key';
+//     const url = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey';
 //     final request = Uri.parse(url);
 //     var response = await http.get(request);
 //     print('Response status: ${response.statusCode}');
@@ -50,9 +51,8 @@
 // url https://api.spoonacular.com/recipes/complexSearch
 
 import 'package:flutter/material.dart';
-import 'package:widgets_app/week8/data/interactors/default_recipe_interactor.dart';
-import 'package:widgets_app/week8/domain/interactors/recipe_interactor.dart';
-import 'package:widgets_app/week8/domain/model/recipe.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:widgets_app/week8/ui/home/home_store.dart';
 import 'package:widgets_app/week8/ui/widgets/recipe_card.dart';
 
 class RecipesScreen extends StatefulWidget {
@@ -63,13 +63,12 @@ class RecipesScreen extends StatefulWidget {
 }
 
 class _RecipesScreenState extends State<RecipesScreen> {
-  final RecipeInteractor _interactor = DefaultRecipeInteractor();
-  var data = <Recipe>[];
+  final _viewModel = HomeStore();
 
   @override
   void initState() {
     super.initState();
-    _fetchData();
+    _viewModel.fetchData();
   }
 
   @override
@@ -78,20 +77,15 @@ class _RecipesScreenState extends State<RecipesScreen> {
       appBar: AppBar(
         title: const Text('Recipes'),
       ),
-      body: ListView.builder(
-        itemBuilder: (_, i) => RecipeCard(
-          recipe: data[i],
-          onTap: () {
-            print('Hello');
-          },
-        ),
-        itemCount: data.length,
-      ),
+      body: Observer(builder: (_) {
+        final data = _viewModel.value;
+        return ListView.builder(
+          itemBuilder: (_, i) => RecipeCard(
+            recipe: data[i],
+          ),
+          itemCount: data.length,
+        );
+      })
     );
-  }
-
-  Future<void> _fetchData() async {
-    final result = await _interactor.getRecipes();
-    setState(() => data = result);
   }
 }

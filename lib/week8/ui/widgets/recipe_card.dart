@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:widgets_app/week8/domain/model/recipe.dart';
 
 class RecipeCard extends StatelessWidget {
-  final void Function() onTap;
+  final void Function()? onTap;
   final Recipe recipe;
 
   const RecipeCard({
     Key? key,
-    required this.onTap,
+    this.onTap,
     required this.recipe,
   }) : super(key: key);
 
