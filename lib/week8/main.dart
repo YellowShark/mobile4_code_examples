@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:widgets_app/week8/ui/home/home_screen.dart';
+import 'package:widgets_app/week8/ui/home/home_screen_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/home',
       routes: {
-        '/home': (_) => const RecipesScreen(),
+        '/home': (_) => const RecipesScreenWithBloc(),
       },
     );
   }
