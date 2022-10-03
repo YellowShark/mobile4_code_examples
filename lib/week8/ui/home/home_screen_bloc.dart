@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:widgets_app/week8/data/interactor/default_recipe_interactor.dart';
+import 'package:widgets_app/week8/data/service/http_recipe_service.dart';
 import 'package:widgets_app/week8/ui/home/home_bloc.dart';
 import 'package:widgets_app/week8/ui/widgets/recipe_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +16,11 @@ class _RecipesScreenWithBlocState extends State<RecipesScreenWithBloc> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HomeCubit(),
+      create: (_) => HomeCubit(
+          DefaultRecipeInteractor(
+              HttpRecipeService()
+          )
+      ),
       child: _content(),
     );
   }

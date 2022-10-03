@@ -28,7 +28,7 @@ mixin _$HomeStore on _HomeStore, Store {
       AsyncAction('_HomeStore.fetchData', context: context);
 
   @override
-  Future fetchData() {
+  Future<dynamic> fetchData() {
     return _$fetchDataAsyncAction.run(() => super.fetchData());
   }
 

@@ -52,6 +52,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:widgets_app/week8/di/config.dart';
 import 'package:widgets_app/week8/ui/home/home_store.dart';
 import 'package:widgets_app/week8/ui/widgets/recipe_card.dart';
 
@@ -63,7 +64,7 @@ class RecipesScreen extends StatefulWidget {
 }
 
 class _RecipesScreenState extends State<RecipesScreen> {
-  final _viewModel = HomeStore();
+  final _viewModel = getIt<HomeStore>();
 
   @override
   void initState() {

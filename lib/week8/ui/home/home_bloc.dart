@@ -4,9 +4,9 @@ import 'package:widgets_app/week8/domain/interactor/recipe_interactor.dart';
 import 'package:widgets_app/week8/domain/model/recipe.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  final RecipeInteractor _interactor = DefaultRecipeInteractor();
+  final RecipeInteractor _interactor;
 
-  HomeCubit() : super(const InitialHomeState());
+  HomeCubit(this._interactor) : super(const InitialHomeState());
 
   Future<void> fetchData() async {
     emit(LoadedRecipesHomeState(await _interactor.getRecipes()));

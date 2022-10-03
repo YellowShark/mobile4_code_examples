@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:widgets_app/week8/di/config.dart';
 import 'package:widgets_app/week8/ui/home/home_screen_bloc.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 
