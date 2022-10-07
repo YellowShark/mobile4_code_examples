@@ -16,6 +16,10 @@ dependencies:
   timezone: ^0.8.0
   objectbox: 1.6.0
   objectbox_flutter_libs: 1.6.0
+  # add injectable to your dependencies
+  injectable: ^1.5.3
+  # add get_it
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:
@@ -24,6 +28,9 @@ dev_dependencies:
   build_runner: 2.2.0
   objectbox_generator: 1.6.0
   flutter_lints: ^2.0.0
+
+  # add the generator to your dev_dependencies
+  injectable_generator: ^1.5.3
 
 flutter:
 

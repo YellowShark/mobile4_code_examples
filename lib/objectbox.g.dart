@@ -28,7 +28,7 @@ final _entities = <ModelEntity>[
             id: const IdUid(1, 6806296734864375663),
             name: 'id',
             type: 6,
-            flags: 129),
+            flags: 1),
         ModelProperty(
             id: const IdUid(2, 7163141469430749741),
             name: 'name',

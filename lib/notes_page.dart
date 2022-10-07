@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_notifications/config.dart';
 import 'package:flutter_notifications/note.dart';
 import 'package:flutter_notifications/notes_repository.dart';
 
@@ -12,7 +13,7 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> {
-  late final _notesRepo = NotesRepository();
+  late final _notesRepo = getIt<NotesRepository>();
   late var _notes = <Note>[];
   StreamSubscription? _subscription;
 
