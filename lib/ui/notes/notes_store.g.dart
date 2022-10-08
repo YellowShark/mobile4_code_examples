@@ -24,12 +24,12 @@ mixin _$NotesStore on _NotesStore, Store {
     });
   }
 
-  late final _$fetchDataAsyncAction =
-      AsyncAction('_NotesStore.fetchData', context: context);
+  late final _$getDataAsyncAction =
+      AsyncAction('_NotesStore.getData', context: context);
 
   @override
   Future<dynamic> getData() {
-    return _$fetchDataAsyncAction.run(() => super.getData());
+    return _$getDataAsyncAction.run(() => super.getData());
   }
 
   @override

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_notifications/ui/notes/notes_page.dart';
 
+import 'di/config.dart';
+
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 

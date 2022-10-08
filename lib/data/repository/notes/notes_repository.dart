@@ -5,8 +5,10 @@ import 'package:flutter_notifications/data/mapper/domain_to_dto.dart';
 import 'package:flutter_notifications/data/mapper/dto_to_domain.dart';
 import 'package:flutter_notifications/domain/model/note.dart';
 import 'package:flutter_notifications/objectbox.g.dart';
+import 'package:injectable/injectable.dart';
 import 'package:objectbox/objectbox.dart';
 
+@lazySingleton
 class NotesRepository {
   late final Store _store;
   late final Box<NoteEntity> _box;

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_notifications/data/entity/note_entity.dart';
 import 'package:flutter_notifications/data/repository/notes/notes_repository.dart';
+import 'package:flutter_notifications/di/config.dart';
 import 'package:flutter_notifications/domain/model/note.dart';
 import 'package:flutter_notifications/ui/notes/notes_store.dart';
 
@@ -15,7 +16,7 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> {
-  final _viewModel = NotesStore();
+  final _viewModel = getIt<NotesStore>();
 
   @override
   void initState() {
